@@ -111,44 +111,44 @@ Pruebas adicionales creadas a partir del análisis estructural: **WB-A, WB-B, WB
 
 ## CONF-01 — Confirmación
 
-**Estado: PENDIENTE** — No hay nuevo build/JAR del docente.
+**Estado: COMPLETADO** — JAR sustituido por `LIBERACIÓN_02_BUILD_V2/calculadora-envio.jar` (2026-10-26 ~17:47).
 
 | Campo | Registro |
 |-------|----------|
-| Caso seleccionado | TC-03 (candidato) |
-| Razón de selección | Única discrepancia FAIL contra R3 |
+| Caso seleccionado | TC-03 (`tc03_premium_montoIgual100_paga3`) |
+| Razón de selección | Única discrepancia DEF-01 (FAIL contra R3 en build V1) |
 | Resultado antes del nuevo build | FAIL (esperado 3.0, obtenido 0.0) |
-| Resultado después del nuevo build | *Pendiente* |
-| Conclusión | *Pendiente* |
+| Resultado después del nuevo build | **PASS** (`mvn test -Dtest=CalculadoraEnvioTest#tc03_premium_montoIgual100_paga3`, exit 0) |
+| Conclusión | La discrepancia de R3 en frontera monto=100 Premium **queda confirmada como corregida** en el build V2, dentro del alcance de este caso. |
 
 ---
 
 ## REG-01 — Regresión
 
-**Estado: PENDIENTE** — Ejecutar tras sustituir el JAR.
+**Estado: COMPLETADO** — Suite completa tras CONF-01 · 2026-10-26 17:48 (-05).
 
 | Campo | Registro |
 |-------|----------|
-| Cantidad total de pruebas reejecutadas | *Pendiente* |
-| PASS | *Pendiente* |
-| FAIL | *Pendiente* |
-| Nuevas discrepancias observadas | *Pendiente* |
-| Conclusión de regresión | *Pendiente* |
+| Cantidad total de pruebas reejecutadas | 11 (TC-01..TC-08 + WB-A, WB-B, WB-C) |
+| PASS | 11 |
+| FAIL | 0 |
+| Nuevas discrepancias observadas | Ninguna |
+| Conclusión de regresión | Tras el build V2, la suite completa **no introdujo nuevas fallas** en los casos ejecutados. Evidencia: surefire `Tests run: 11, Failures: 0, Errors: 0`. |
 
 ---
 
-## TSR-01 — Informe final de prueba (parcial — caja negra + caja blanca V1)
+## TSR-01 — Informe final de prueba
 
 | Campo | Registro |
 |-------|----------|
-| Objeto y versión final | JAR inicial + fuente V1 inspeccionada; **sin** build de corrección aún |
-| Alcance probado | R1–R5 (TC-01..TC-08) + cobertura de decisiones D1–D4 (WB-A..C) |
-| Casos ejecutados | 8 funcionales + 3 estructurales = 11 (tras reejecución WB) |
-| Discrepancias/defectos registrados | 1 (DEF-01 / TC-03); causa raíz: `monto >= 100` en V1 |
-| Confirmación | No ejecutada (falta nuevo build) |
-| Regresión | No ejecutada |
-| Riesgo residual / limitaciones | Defecto de frontera Premium=100 sigue presente en el JAR/V1. Dominio no exhaustivo. CONF/REG pendientes. |
-| Conclusión técnica final | Evidencia funcional + estructural confirma incumplimiento de R3 en monto=100 Premium por operador `>=` en D3. Resto de decisiones D1–D4 ejercitadas en True y False. No se afirma ausencia de otros defectos. |
+| Objeto y versión final | `CalculadoraEnvio` — build **V2** (`lib/calculadora-envio.jar` desde `LIBERACIÓN_02_BUILD_V2`) |
+| Alcance probado | R1–R5 (TC-01..TC-08) + decisiones D1–D4 (WB-A..C) |
+| Casos ejecutados | 11 en regresión final |
+| Discrepancias/defectos registrados | 1 (DEF-01 / TC-03 en V1); **confirmada corrección** en V2 (CONF-01) |
+| Confirmación | PASS (TC-03) |
+| Regresión | PASS (11/11) |
+| Riesgo residual / limitaciones | Solo se ejercitó el conjunto de casos diseñado (no el dominio completo). No se inspeccionó el fuente del build V2. Conclusiones limitadas a la evidencia obtenida. |
+| Conclusión técnica final | En el **build V2**, con la suite ejecutada, **no se observaron fallos** respecto a R1–R5 ni a las pruebas estructurales añadidas. El defecto DEF-01 del build V1 quedó confirmado como resuelto en TC-03. **No** se afirma que el software esté libre de defectos fuera de este alcance. |
 
 ---
 
@@ -160,6 +160,7 @@ Pruebas adicionales creadas a partir del análisis estructural: **WB-A, WB-B, WB
 - [x] `CalculadoraEnvioTest.java` implementado
 - [x] Conclusión limitada a la evidencia
 - [x] WB-01 completado (fuente V1)
-- [ ] CONF-01 / REG-01 cuando el docente libere nuevo build
+- [x] CONF-01 / REG-01 (build V2)
 - [ ] Defensa oral (en aula)
 - [ ] Carpeta final `APELLIDO_NOMBRE_ISWD752_EP01`
+- [ ] Copiar este contenido a `02_Plantilla_Evidencias_y_Entrega.docx` + capturas

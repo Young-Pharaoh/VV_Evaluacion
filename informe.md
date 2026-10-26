@@ -170,23 +170,59 @@ if (monto >= 100) {   // D3 — incorrecto respecto a R2/R3 (debe ser monto > 10
 
 ---
 
-## Paso 9 — Fases aún pendientes (docente)
+## Paso 9 — Liberación 02: build V2 (confirmación + regresión)
 
-| Fase | Producto | Motivo de bloqueo |
-|------|----------|-------------------|
-| Nuevo build / confirmación | CONF-01 | Falta JAR/build corregido |
-| Regresión | REG-01 | Depende del nuevo build |
-| Defensa oral | — | En aula con el docente |
-| Carpeta entrega | `APELLIDO_NOMBRE_ISWD752_EP01` | Renombrar/empaquetar al cerrar |
+**Acción (según `INSTRUCCION_PARA_ESTUDIANTE.txt`):**  
+1. Sustituir `03_Proyecto_Inicial_Caja_Negra/lib/calculadora-envio.jar` por el JAR de `LIBERACIÓN_02_BUILD_V2/`.  
+2. Ejecutar **primero** la prueba de la discrepancia (TC-03).  
+3. Ejecutar **después** toda la suite.
+
+**Resultado CONF-01:**
+
+```bash
+mvn test -Dtest=CalculadoraEnvioTest#tc03_premium_montoIgual100_paga3
+# EXIT=0 → PASS (antes: FAIL expected 3.0 / was 0.0)
+```
+
+| Campo | Valor |
+|-------|--------|
+| Caso | TC-03 |
+| Antes (V1) | FAIL |
+| Después (V2) | **PASS** |
+| Conclusión | Discrepancia R3 en frontera 100 Premium **corregida** en V2 |
+
+**Resultado REG-01** (2026-10-26 17:48 -05):
+
+```
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0
+```
+
+| Métrica | Valor |
+|---------|--------|
+| Reejecutadas | 11 |
+| PASS | 11 |
+| FAIL | 0 |
+| Nuevas discrepancias | Ninguna |
 
 ---
 
-## Paso 10 — Conclusión técnica parcial (tras WB-01)
+## Paso 10 — Fases administrativas aún pendientes
 
-1. PASS: TC-01,02,04,05,06,07,08 + WB-A,B,C.  
-2. FAIL: TC-03 (R3) — explicado por D3 `>=` en fuente V1.  
-3. WB-01 completado; CONF-01 / REG-01 pendientes.  
-4. No se afirma ausencia de otros defectos fuera del alcance ejercitado.
+| Fase | Producto | Estado |
+|------|----------|--------|
+| Informe / evidencias DOCX | Plantilla oficial | Copiar desde `evidencias.md` |
+| Defensa oral | Pregunta docente | En aula |
+| Carpeta entrega | `APELLIDO_NOMBRE_ISWD752_EP01` | Empaquetar al cerrar |
+| Capturas CONF/REG | Evidencia visual | Ver Anexo A |
+
+---
+
+## Paso 11 — Conclusión técnica (tras V2)
+
+1. Build V1: FAIL en TC-03; causa `monto >= 100` (WB-01).  
+2. Build V2: CONF-01 PASS (TC-03) + REG-01 11/11 PASS.  
+3. Dentro del alcance ejecutado, no se observaron fallos en V2.  
+4. No se afirma que el software esté libre de defectos fuera de ese alcance.
 
 ---
 
@@ -199,21 +235,19 @@ La plantilla habla de “evidencia disponible” y de registrar ejecución; no e
 3. **(Opcional)** Vista del proyecto Maven con `lib/calculadora-envio.jar` sin modificar.  
 4. **Fuente V1 / WB-01:** captura del método `calcular` mostrando `monto >= 100` y tabla de decisiones.  
 5. **Suite tras WB:** 11 tests, 1 failure (TC-03) + PASS de WB-A/B/C.  
-6. **Cuando den el nuevo JAR:** captura de CONF-01 (TC-03 PASS) y REG-01 (suite completa).  
-7. **Defensa oral:** explicar DEF-01 = operador `>=` vs especificación `>` en R2/R3.
+6. **CONF-01:** captura de TC-03 **PASS** solo (tras cambiar JAR V2).  
+7. **REG-01:** captura suite **11 tests, 0 failures**.  
+8. **Defensa oral:** DEF-01 = `>=` vs `>` en R2/R3; luego V2 confirma corrección.
 
 ---
 
-## Anexo B — Resumen corto: hecho vs falta (actualizado tras V1)
+## Anexo B — Resumen corto: hecho vs falta (actualizado tras V2)
 
 ### Hecho
-- Caja negra (PLAN/ANAL/TC/EXEC/DEF) + JUnit funcional.  
-- **WB-01** con fuente V1; causa raíz confirmada (`>= 100`).  
-- 3 pruebas estructurales (WB-A/B/C); suite 11 tests / 1 FAIL.  
+- Ciclo completo técnico: PLAN → ANAL → TC → JUnit → EXEC → DEF → WB → **CONF → REG → TSR**.  
+- JAR V2 instalado; TC-03 PASS; suite 11/11 PASS.  
 - `evidencias.md` e `informe.md` actualizados.
 
 ### Falta
-- Copiar evidencias al **DOCX oficial**.  
-- Nuevo build → **CONF-01** (primero TC-03) → **REG-01**.  
-- TSR-01 final, defensa oral, carpeta `APELLIDO_NOMBRE_ISWD752_EP01`.  
-- Capturas (Anexo A puntos 4–6).
+- Copiar evidencias al **DOCX oficial** + capturas.  
+- Defensa oral y carpeta `APELLIDO_NOMBRE_ISWD752_EP01`.

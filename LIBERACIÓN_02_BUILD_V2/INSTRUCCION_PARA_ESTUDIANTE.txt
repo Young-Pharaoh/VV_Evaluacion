@@ -1,0 +1,1 @@
+Sustituya el archivo lib/calculadora-envio.jar de su proyecto por este archivo (mismo nombre). A continuación ejecute primero la prueba asociada a la discrepancia registrada y después toda su suite.

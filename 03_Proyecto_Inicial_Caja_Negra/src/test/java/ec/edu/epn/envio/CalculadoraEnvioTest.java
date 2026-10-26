@@ -59,4 +59,33 @@ class CalculadoraEnvioTest {
     void tc08_premium_montoJustoMayor100_envioGratis() {
         assertEquals(0.0, calculadora.calcular(100.01, true));
     }
+
+    // --- Pruebas estructurales (WB-01) tras inspeccionar fuente V1 ---
+
+    /**
+     * WB-A | R1 | Confirma que monto &lt; 0 lanza excepción también con premium=true
+     * (misma decisión D1; el flag premium no se evalúa tras el throw).
+     */
+    @Test
+    void wbA_montoNegativo_conPremium_lanzaIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class,
+                () -> calculadora.calcular(-0.01, true));
+    }
+
+    /**
+     * WB-B | R5 | No Premium con monto claramente &gt; 50 ejercita rama False de (monto &lt; 50).
+     */
+    @Test
+    void wbB_noPremium_montoAlto_paga5() {
+        assertEquals(5.0, calculadora.calcular(200.0, false));
+    }
+
+    /**
+     * WB-C | R3 | Premium justo bajo 100 ejercita False de (monto &gt;= 100) → 3.0.
+     * Complementa TC-04 cerca de la frontera defectuosa.
+     */
+    @Test
+    void wbC_premium_montoJustoBajo100_paga3() {
+        assertEquals(3.0, calculadora.calcular(99.99, true));
+    }
 }

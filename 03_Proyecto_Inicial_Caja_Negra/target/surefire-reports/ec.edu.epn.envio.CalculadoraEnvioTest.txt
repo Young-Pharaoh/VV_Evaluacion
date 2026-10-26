@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: ec.edu.epn.envio.CalculadoraEnvioTest
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.126 s <<< FAILURE! -- in ec.edu.epn.envio.CalculadoraEnvioTest
-ec.edu.epn.envio.CalculadoraEnvioTest.tc03_premium_montoIgual100_paga3 -- Time elapsed: 0.052 s <<< FAILURE!
+Tests run: 11, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.043 s <<< FAILURE! -- in ec.edu.epn.envio.CalculadoraEnvioTest
+ec.edu.epn.envio.CalculadoraEnvioTest.tc03_premium_montoIgual100_paga3 -- Time elapsed: 0.021 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: <3.0> but was: <0.0>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)

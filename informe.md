@@ -145,26 +145,48 @@ at CalculadoraEnvioTest.tc03_premium_montoIgual100_paga3
 
 ---
 
-## Paso 8 — Fases NO ejecutadas (bloqueadas por materiales del docente)
+## Paso 8 — Liberación 01: fuente V1 (caja blanca)
+
+**Acción:** Leer `LIBERACIÓN_01_FUENTE_V1/LEER_AL_LIBERAR.txt` y  
+`LIBERACIÓN_01_FUENTE_V1/src/main/java/ec/edu/epn/envio/CalculadoraEnvio.java`.  
+**Resultado:** Identificadas 4 decisiones (D1–D4). Causa raíz de DEF-01 confirmada:
+
+```java
+if (monto >= 100) {   // D3 — incorrecto respecto a R2/R3 (debe ser monto > 100)
+    return 0.0;
+}
+```
+
+| Decisión | True | False | Casos |
+|----------|------|-------|-------|
+| D1 `monto < 0` | TC-01, WB-A | resto | Cubierto |
+| D2 `premium` | TC-02..04,08, WB-C | TC-05..07, WB-B | Cubierto |
+| D3 `monto >= 100` | TC-02,03,08 | TC-04, WB-C | Cubierto (y revela defecto) |
+| D4 `monto < 50` | TC-05,07 | TC-06, WB-B | Cubierto |
+
+**Pruebas estructurales añadidas:** WB-A, WB-B, WB-C.  
+**Reejecución:** `mvn test` → **Tests run: 11, Failures: 1** (sigue TC-03). WB-A/B/C = PASS.  
+**JAR no modificado** (solo inspección de fuente V1).
+
+---
+
+## Paso 9 — Fases aún pendientes (docente)
 
 | Fase | Producto | Motivo de bloqueo |
 |------|----------|-------------------|
-| Caja blanca | WB-01 | Falta fuente V1 |
-| Nuevo build / confirmación | CONF-01 | Falta JAR corregido |
+| Nuevo build / confirmación | CONF-01 | Falta JAR/build corregido |
 | Regresión | REG-01 | Depende del nuevo build |
 | Defensa oral | — | En aula con el docente |
 | Carpeta entrega | `APELLIDO_NOMBRE_ISWD752_EP01` | Renombrar/empaquetar al cerrar |
 
 ---
 
-## Paso 9 — Conclusión técnica parcial (TSR-01 preliminar)
+## Paso 10 — Conclusión técnica parcial (tras WB-01)
 
-Con la evidencia de la suite de 8 casos sobre el JAR inicial:
-
-1. Se observó **PASS** en TC-01, TC-02, TC-04, TC-05, TC-06, TC-07, TC-08.  
-2. Se observó **FAIL** en TC-03 (R3, frontera 100 Premium).  
-3. **No** se afirma que el componente esté libre de defectos fuera de este alcance.  
-4. Pendiente: caja blanca, confirmación y regresión cuando el docente libere recursos.
+1. PASS: TC-01,02,04,05,06,07,08 + WB-A,B,C.  
+2. FAIL: TC-03 (R3) — explicado por D3 `>=` en fuente V1.  
+3. WB-01 completado; CONF-01 / REG-01 pendientes.  
+4. No se afirma ausencia de otros defectos fuera del alcance ejercitado.
 
 ---
 
@@ -175,24 +197,23 @@ La plantilla habla de “evidencia disponible” y de registrar ejecución; no e
 1. **Ejecución JUnit en el IDE** (árbol de resultados: 7 verdes / 1 rojo en TC-03) o salida de `mvn test` en terminal.  
 2. **Mensaje de fallo** (expected 3.0 / was 0.0) — surefire o panel de failures del IDE.  
 3. **(Opcional)** Vista del proyecto Maven con `lib/calculadora-envio.jar` sin modificar.  
-4. **Cuando liberen V1:** captura del código fuente y de WB-01 (decisiones True/False).  
-5. **Cuando den el nuevo JAR:** captura de CONF-01 (TC-03 PASS) y REG-01 (suite completa).  
-6. **Defensa oral:** no es foto; preparación verbal con DEF-01 y fronteras R2/R3.
+4. **Fuente V1 / WB-01:** captura del método `calcular` mostrando `monto >= 100` y tabla de decisiones.  
+5. **Suite tras WB:** 11 tests, 1 failure (TC-03) + PASS de WB-A/B/C.  
+6. **Cuando den el nuevo JAR:** captura de CONF-01 (TC-03 PASS) y REG-01 (suite completa).  
+7. **Defensa oral:** explicar DEF-01 = operador `>=` vs especificación `>` en R2/R3.
 
 ---
 
-## Anexo B — Resumen corto: hecho vs falta
+## Anexo B — Resumen corto: hecho vs falta (actualizado tras V1)
 
 ### Hecho
-- Planificación, análisis y 8 casos de caja negra documentados.  
-- `CalculadoraEnvioTest.java` implementado.  
-- `mvn test` ejecutado; EXEC-01 y DEF-01 (TC-03) registrados.  
-- `evidencias.md` + `informe.md` creados.
+- Caja negra (PLAN/ANAL/TC/EXEC/DEF) + JUnit funcional.  
+- **WB-01** con fuente V1; causa raíz confirmada (`>= 100`).  
+- 3 pruebas estructurales (WB-A/B/C); suite 11 tests / 1 FAIL.  
+- `evidencias.md` e `informe.md` actualizados.
 
 ### Falta
-- Copiar evidencias al **DOCX/PDF oficial** de entrega.  
-- WB-01 (fuente V1).  
-- Sustituir JAR, CONF-01 y REG-01.  
-- Completar TSR-01 final tras confirmación/regresión.  
-- Defensa oral y carpeta `APELLIDO_NOMBRE_ISWD752_EP01`.  
-- Capturas de pantalla recomendadas (Anexo A).
+- Copiar evidencias al **DOCX oficial**.  
+- Nuevo build → **CONF-01** (primero TC-03) → **REG-01**.  
+- TSR-01 final, defensa oral, carpeta `APELLIDO_NOMBRE_ISWD752_EP01`.  
+- Capturas (Anexo A puntos 4–6).

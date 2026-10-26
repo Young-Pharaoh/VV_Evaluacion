@@ -1,0 +1,8 @@
+ISWD752 - Evaluación práctica 01
+
+1) Lea 00_Instrucciones_Evaluacion_Practica.pdf.
+2) Use 01_Base_de_Prueba_Especificacion.pdf como referencia normativa del ejercicio.
+3) Complete 02_Plantilla_Evidencias_y_Entrega.docx durante la evaluación.
+4) Abra 03_Proyecto_Inicial_Caja_Negra como proyecto Maven.
+5) NO dispone inicialmente del código fuente del componente. El docente liberará recursos adicionales durante la evaluación.
+6) Entregue una carpeta APELLIDO_NOMBRE_ISWD752_EP01 con su documento de evidencias y CalculadoraEnvioTest.java.

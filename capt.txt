@@ -1,0 +1,22 @@
+
+Ciclo de caja negra + ejecución listo. Hallazgo clave: **TC-03 FAIL** — Premium con monto `100.0` debía devolver `3.0` (R3) y el JAR devolvió `0.0`.
+
+### Fotos / capturas recomendadas
+La plantilla no fija un número de fotos; pide “evidencia”. Conviene capturar:
+
+1. Resultado de `mvn test` o JUnit en el IDE (7 PASS / 1 FAIL)  
+2. Mensaje del fallo TC-03 (`expected 3.0 but was 0.0`)  
+3. *(Opcional)* Proyecto con el JAR sin modificar  
+4. **Después:** fuente V1 (WB-01), nuevo JAR (CONF-01) y suite de regresión (REG-01)
+
+### Hecho
+- PLAN-01, ANAL-01, 8 casos TC, JUnit en `CalculadoraEnvioTest.java`  
+- `mvn test` → 8 run, 1 failure (DEF-01 en TC-03)  
+- `evidencias.md` + bitácora completa en `informe.md`
+
+### Falta
+- Copiar `evidencias.md` → `02_Plantilla_Evidencias_y_Entrega.docx`  
+- WB-01 / CONF-01 / REG-01 (falta material del docente)  
+- Carpeta `APELLIDO_NOMBRE_ISWD752_EP01`, capturas y defensa oral  
+
+Detalle de cada paso y resultados: **`informe.md`**.
